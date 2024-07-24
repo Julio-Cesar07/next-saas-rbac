@@ -1,0 +1,17 @@
+{
+    "extends": "@saas/tsconfig/node.json",
+    "include": ["src/**/*"],
+    "compilerOptions": {
+        "strict": true,
+        "strictNullChecks": true,
+        "types": [
+            "vitest/globals"
+        ],
+        "baseUrl": ".",
+        "paths": {
+            "@/*": [
+                "./src/*"
+            ],
+        }
+    }
+}

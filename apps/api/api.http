@@ -1,0 +1,27 @@
+@localhost = http://localhost:3333
+
+# @name test_api
+GET {{localhost}}/api
+
+### 
+
+# @name create_account
+POST {{localhost}}/users
+Content-Type: application/json
+
+{
+    "name": "julio",
+    "password": "12345678",
+    "email": "julio@acme.com"
+}
+
+### 
+
+# @name authenticate_with_password
+POST {{localhost}}/sessions/password
+Content-Type: application/json
+
+{
+    "email": "julio@acme.com",
+    "password": "12345678"
+}
