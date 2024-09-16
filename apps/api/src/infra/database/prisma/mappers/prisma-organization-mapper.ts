@@ -19,6 +19,12 @@ export class PrismaOrganizationMapper {
 			domain: organization.domain,
 			id: organization.id.toString(),
 			shouldAttachUserByDomain: organization.shouldAttachUserByDomain,
+			members: {
+				create: {
+					userId: organization.ownerId.toString(),
+					role: 'ADMIN',
+				},
+			},
 		};
 	}
 

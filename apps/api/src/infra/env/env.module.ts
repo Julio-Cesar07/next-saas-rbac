@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { envSchema } from '@saas/env';
 
-import { envSchema } from './env';
 import { EnvService } from './env.service';
 
 @Module({

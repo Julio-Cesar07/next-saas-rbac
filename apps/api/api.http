@@ -1,4 +1,5 @@
 @localhost = http://localhost:3333
+@token = {{authenticate_with_password.response.body.token}}
 
 # @name test_api
 GET {{localhost}}/api
@@ -23,5 +24,32 @@ Content-Type: application/json
 
 {
     "email": "julio@acme.com",
+    "password": "12345678"
+}
+
+### 
+
+# @name get_profile
+GET {{localhost}}/profile
+Authorization: Bearer {{token}}
+
+### 
+
+# @name request_password_recover
+POST {{localhost}}/password/recover
+Content-Type: application/json
+
+{
+    "email": "julio@acme.com"
+}
+
+### 
+
+# @name reset_password
+POST {{localhost}}/password/reset
+Content-Type: application/json
+
+{
+    "code": "cce12182-5a17-4a9b-890c-2ad161c461f6",
     "password": "12345678"
 }

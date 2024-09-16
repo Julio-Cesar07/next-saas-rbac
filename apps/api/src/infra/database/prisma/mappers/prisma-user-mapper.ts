@@ -29,6 +29,16 @@ export class PrismaUserMapper {
 		};
 	}
 
+	static toPrismaUpdate(user: RawUser): Prisma.UserUncheckedUpdateInput {
+		return {
+			passwordHash: user.passwordHash,
+			name: user.name,
+			avatarUrl: user.avatarUrl,
+			createdAt: user.createdAt,
+			updatedAt: user.updatedAt,
+		};
+	}
+
 	static toDomain(user: User): RawUser {
 		return RawUser.create(
 			{

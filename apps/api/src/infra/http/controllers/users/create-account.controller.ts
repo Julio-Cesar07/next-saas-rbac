@@ -1,4 +1,4 @@
-import { Body, ConflictException, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger';
 
 import { CreateAccountUseCase } from '@/domain/saas/application/use-cases/user/create-account';
@@ -7,6 +7,7 @@ import {
 	CreateAccountDto,
 	createAccountValidation,
 } from '../../dtos/create-account.dto';
+import { ApiErrorDecorator } from '../_errors/api-error-decorator';
 
 @Controller('users')
 export class CreateAccountController {
@@ -17,10 +18,10 @@ export class CreateAccountController {
 		summary: 'Create a new account',
 		tags: ['auth'],
 	})
+	@ApiErrorDecorator([409])
 	async handle(@Body(createAccountValidation) body: CreateAccountDto) {
 		const result = await this.createAccountUseCase.execute(body);
 
-		if (result.isLeft())
-			throw new ConflictException(result.value.name, result.value.message);
+		if (result.isLeft()) throw result.value;
 	}
 }

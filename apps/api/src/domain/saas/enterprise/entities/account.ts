@@ -1,11 +1,11 @@
 import { Entity } from '../../../../core/entities/entity';
 import type { UniqueEntityId } from '../../../../core/entities/unique-entity-id';
 
-type AccountProvider = 'GITHUB';
+export type AccountProvider = 'GITHUB';
 
 interface AccountProps {
 	provider: AccountProvider;
-	provider_account_id: UniqueEntityId;
+	providerAccountId: UniqueEntityId;
 	userId: UniqueEntityId;
 }
 
@@ -25,8 +25,8 @@ export class Account extends Entity<AccountProps> {
 		return this.props.provider;
 	}
 
-	get provider_account_id() {
-		return this.props.provider_account_id;
+	get providerAccountId() {
+		return this.props.providerAccountId;
 	}
 
 	get userId() {

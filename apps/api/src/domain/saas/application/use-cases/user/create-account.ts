@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { UserAlreadyExistError } from '@/core/errors/user-already-exist-error';
+import { EntityAlreadyExistError } from '@/core/errors/entity-already-exist-error';
 import { type Either, left, right } from '@/core/use-cases/either';
 import { UseCase } from '@/core/use-cases/use-case';
 import { Member } from '@/domain/saas/enterprise/entities/member';
@@ -16,7 +16,7 @@ type CreateAccountUseCaseRequest = {
 	password: string;
 };
 
-type CreateUseCaseResponse = Either<UserAlreadyExistError, null>;
+type CreateUseCaseResponse = Either<EntityAlreadyExistError, null>;
 
 @Injectable()
 export class CreateAccountUseCase
@@ -35,7 +35,7 @@ export class CreateAccountUseCase
 	}: CreateAccountUseCaseRequest): Promise<CreateUseCaseResponse> {
 		const userWithSameEmail = await this.userRepository.findUniqueEmail(email);
 
-		if (userWithSameEmail) return left(new UserAlreadyExistError());
+		if (userWithSameEmail) return left(new EntityAlreadyExistError());
 
 		const passwordHash = await this.hash.generator(password);
 

@@ -1,13 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { z } from 'zod';
+import { z, ZodString } from 'zod';
 
+import { TypeToValidationLib } from '@/core/types/converter-type-to-any-lib';
+import { JwtPayload } from '@/domain/saas/application/cryptography/jwt';
 import { EnvService } from '@/infra/env/env.service';
 
-const tokenPayloadSchema = z.object({
-	sub: z.string().uuid(),
-});
+const tokenPayloadSchema = z.object<TypeToValidationLib<JwtPayload, ZodString>>(
+	{
+		sub: z.string().uuid(),
+	}
+);
 
 export type TokenPayloadSchema = z.infer<typeof tokenPayloadSchema>;
 

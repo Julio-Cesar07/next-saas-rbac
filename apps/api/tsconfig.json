@@ -4,6 +4,8 @@
     "compilerOptions": {
         "strict": true,
         "strictNullChecks": true,
+        "strictPropertyInitialization": false,
+        // "esModuleInterop": true,
         "types": [
             "vitest/globals"
         ],

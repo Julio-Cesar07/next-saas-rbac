@@ -10,6 +10,14 @@ import { PrismaService } from '../prisma.service';
 export class PrismaOrganizationRepository implements OrganizationRepository {
 	constructor(private prisma: PrismaService) {}
 
+	async create(organization: Organization): Promise<void> {
+		const data = PrismaOrganizationMapper.toPrisma(organization);
+
+		await this.prisma.organization.create({
+			data,
+		});
+	}
+
 	async findUniqueDomain(domain: string): Promise<Organization | null> {
 		const organization = await this.prisma.organization.findUnique({
 			where: {
@@ -21,5 +29,22 @@ export class PrismaOrganizationRepository implements OrganizationRepository {
 		return organization
 			? PrismaOrganizationMapper.toDomain(organization)
 			: null;
+	}
+
+	async findManySlugByHyphenatedOrganizationName(
+		organizationName: string
+	): Promise<string[]> {
+		const slugsAlreadyUsed = await this.prisma.organization.findMany({
+			where: {
+				slug: {
+					startsWith: organizationName + '-',
+				},
+			},
+			select: {
+				slug: true,
+			},
+		});
+
+		return slugsAlreadyUsed.map((slugUsed) => slugUsed.slug);
 	}
 }

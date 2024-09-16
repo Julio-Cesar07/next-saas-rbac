@@ -16,3 +16,9 @@ export class AuthenticateWithPasswordDto extends createZodDto(
 export const authenticateWithPasswordValidation = new ZodValidationPipe(
 	authenticateWithPasswordDto
 );
+
+export class AuthenticateWithPasswordResponse extends createZodDto(
+	z.object({
+		token: z.string(),
+	})
+) {}

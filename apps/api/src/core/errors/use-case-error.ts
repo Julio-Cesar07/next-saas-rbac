@@ -1,4 +1,4 @@
-type ErrorHttpProps = {
+export type ErrorHttpProps = {
 	message: string;
 	statusCode: number;
 };

@@ -14,7 +14,7 @@ interface AuthenticateWithPasswordUseCaseRequest {
 	password: string;
 }
 
-type AuthenticateWithPasswordUseCaseResponse = Either<
+export type AuthenticateWithPasswordUseCaseResponse = Either<
 	InvalidCredentialError | AccountDoesNotHavePassword,
 	{
 		token: string;

@@ -12,7 +12,7 @@ export class NestJsJwt implements JwtEncrypter {
 
 	signAccessToken(payload: JwtPayload): Promise<string> {
 		return this.jwtService.signAsync(payload, {
-			expiresIn: '15m',
+			expiresIn: '1d',
 		});
 	}
 

@@ -1,0 +1,12 @@
+{
+    "extends": "@saas/tsconfig/node.json",
+    "include": ["src/**/*"],
+    "compilerOptions": {
+        "strict": true,
+        "strictNullChecks": true,
+        "strictPropertyInitialization": false,
+        "module": "CommonJS",
+        "declaration": true,
+        "outDir": "./dist"
+    }
+}

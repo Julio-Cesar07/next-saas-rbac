@@ -29,4 +29,12 @@ export class Slug {
 
 		return new Slug(slugText);
 	}
+
+	static createUniqueFromText(text: string, slugAlreadyCreated: number[]) {
+		const arraySorted = slugAlreadyCreated.sort((a, b) => a - b);
+
+		return this.createFromText(
+			`${text}-${arraySorted.length > 0 ? arraySorted[arraySorted.length - 1] + 1 : '1'}`
+		);
+	}
 }
